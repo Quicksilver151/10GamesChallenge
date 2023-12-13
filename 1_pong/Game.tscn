@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=3 uid="uid://bn2g21oc3m6ne"]
+
+[ext_resource type="PackedScene" uid="uid://c15g5dh5ksq73" path="res://Ball.tscn" id="1_4gx44"]
+[ext_resource type="Script" path="res://Game.gd" id="1_guj1s"]
+[ext_resource type="Script" path="res://MockupPolygon.gd" id="2_g4txq"]
+[ext_resource type="Script" path="res://Bot.gd" id="4_cu15m"]
+[ext_resource type="Script" path="res://Player.gd" id="4_fb08n"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fh0y2"]
+font_size = 64
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_guj1s")
+
+[node name="Overlay" type="CanvasLayer" parent="."]
+
+[node name="Margin" type="MarginContainer" parent="Overlay"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Label" type="Label" parent="Overlay/Margin"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Score: 00"
+label_settings = SubResource("LabelSettings_fh0y2")
+
+[node name="Ball" parent="." instance=ExtResource("1_4gx44")]
+unique_name_in_owner = true
+position = Vector2(528, 384)
+linear_velocity = Vector2(1250, 500)
+linear_damp_mode = 1
+angular_damp_mode = 1
+
+[node name="MockupPolygon" type="Polygon2D" parent="."]
+color = Color(0.227451, 0.227451, 0.227451, 1)
+polygon = PackedVector2Array(1920, 0, 1920, -128, -256, -128, -256, 1280, 2176, 1280, 2176, -128, 1936, -128, 1936, 0, 2048, 0, 2048, 1080, -128, 1080, -128, 0)
+script = ExtResource("2_g4txq")
+
+[node name="Areas" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Win" type="Area2D" parent="Areas"]
+position = Vector2(-128, 0)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Win"]
+polygon = PackedVector2Array(0, 0, 0, 1088, 112, 1088, 112, 0)
+
+[node name="Lose" type="Area2D" parent="Areas"]
+position = Vector2(1920, 0)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Lose"]
+polygon = PackedVector2Array(16, 0, 16, 1088, 128, 1088, 128, 0)
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(1904, 64)
+motion_mode = 1
+script = ExtResource("4_fb08n")
+metadata/_edit_group_ = true
+
+[node name="MockupPolygon" type="Polygon2D" parent="Player"]
+polygon = PackedVector2Array(0, -64, 0, 64, 16, 64, 16, -64)
+
+[node name="MockupPolygon2" type="CollisionPolygon2D" parent="Player"]
+polygon = PackedVector2Array(0, -64, 0, 64, 16, 64, 16, -64)
+
+[node name="Bot" type="Node2D" parent="."]
+script = ExtResource("4_cu15m")
+
+[node name="MockupPolygon" type="Polygon2D" parent="Bot"]
+polygon = PackedVector2Array(0, -64, 0, 64, 16, 64, 16, -64)
+script = ExtResource("2_g4txq")
