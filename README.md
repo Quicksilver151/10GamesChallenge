@@ -2,8 +2,8 @@ This is my attempt at making 10 games from the [20 games challenge](https://20_g
 
 Games (subject to change till completion):
 
-- [ ] Pong
-- [ ] Breakout
+- [x] Pong
+- [/] Breakout
 - [ ] Space Invaders
 - [ ] Asteroids
 - [ ] Pac Man
