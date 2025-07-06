@@ -8,4 +8,3 @@ func _ready():
 				"play" : get_tree().change_scene_to_file("res://Game.tscn")
 				"quit" : get_tree().quit()
 			)
-

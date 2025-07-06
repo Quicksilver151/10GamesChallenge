@@ -9,5 +9,3 @@ func _ready():
 	collision_polygon.polygon = polygon
 	static_body.add_child(collision_polygon)
 	
-
-
